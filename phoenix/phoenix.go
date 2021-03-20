@@ -52,23 +52,25 @@ func openPrimaryAndBackupFile(i int) {
  }
  
 
- func checkTimeOut(a1 int, a2 int)bool{
- 	if a1 == a2{
- 		return true
-	}
-	return false
- }
 
 func main() {
+	backupnum := addToBackupAndGetI()
+
+	for{
+		if backupnum != addToBackupAndGetI(){
+			break
+		}
+		backupnum += 1
+		time.Sleep(time.Second)
+		//maybe find a better solution
+	}
 	cmd := exec.Command("cmd", "/C", "start", "cmd", "go", "run", "main.go") //the second cmd can be changed with powershell
 	err := cmd.Run()
 	if err != nil { //getNewPrimaryandBackup()
 		log.Fatal(err)
-
 	}
-	//finn på noe sjekktimeout == false greier
+
 	for {
-		//hvis checkTimeout == false liksom
 		addToBackupAndGetI()
 		openPrimaryAndBackupFile(addToBackupAndGetI())
 		addNumber(addToBackupAndGetI())
