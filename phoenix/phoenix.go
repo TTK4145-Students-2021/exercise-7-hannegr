@@ -57,14 +57,14 @@ func main() {
 	backupnum := addToBackupAndGetI()
 
 	for{
-		if backupnum != addToBackupAndGetI(){
+		time.Sleep(time.Second)
+		if backupnum == addToBackupAndGetI(){
 			break
 		}
 		backupnum += 1
-		time.Sleep(time.Second)
 		//maybe find a better solution
 	}
-	cmd := exec.Command("cmd", "/C", "start", "cmd", "go", "run", "main.go") //the second cmd can be changed with powershell
+	cmd := exec.Command("cmd", "/C", "start", "powershell", "go", "run", "phoenix.go") //the second cmd can be changed with powershell
 	err := cmd.Run()
 	if err != nil { //getNewPrimaryandBackup()
 		log.Fatal(err)
